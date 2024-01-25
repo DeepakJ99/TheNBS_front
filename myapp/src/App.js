@@ -4,35 +4,30 @@ import './Fonts.css'
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import Login from './Components/Login'
 import Register from './Components/Register';
-import { useAuth } from './Components/AuthContext';
-const PrivateRoute = ({children}) => {
-  const {authenticated} = useAuth()
-  console.log(authenticated)
-  return(
-    authenticated ? (children):<Navigate to = "/login"/>
-  )
-}
-
+import ProtectedRoutes from './Components/ProtectedRoutes';
 const Protected = () =>{
-  return (
-    <h2>
-      protected
-    </h2>
-  )
+  return (<>
+  <h2>
+    Hey
+  </h2>
+  </>)
 }
 
 function App() {
+  console.log(1)
   return (
     
-    <Router>
-      <Routes>
-        <Route path='/login' element = {<Login/>} />
-        <Route path = '/register' element = {<Register/>} />
-        <Route path = '/protected' element = {<PrivateRoute/>} >
-          <Route element = {<Protected/>} />
-        </Route>
-      </Routes>
-    </Router>
+    
+        <Routes>
+          <Route path='/login' element = {<Login/>} />
+          <Route path = '/register' element = {<Register/>} />
+          <Route path = '/unauthorized' element = {<>
+            <h2> unauthorized </h2>
+          </> } />
+          <Route element = { <ProtectedRoutes allowedRoles={[1984]} /> }>
+              <Route path = "protected" element = {<Protected />} />
+          </Route>
+        </Routes>
   
    );
 }
