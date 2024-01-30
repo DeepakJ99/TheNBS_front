@@ -1,0 +1,8 @@
+.container{
+    display: 'flex';
+    flex-direction: 'column';
+    height: '100vh';
+    overflow-y: 'scroll';
+    scroll-snap-type: 'y mandatory';
+    background-color: red;
+}

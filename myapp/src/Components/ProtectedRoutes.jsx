@@ -7,11 +7,11 @@ const ProtectedRoutes = ({ allowedRoles }) => {
     const location = useLocation();
     console.log(authenticated)
     return (
-        authenticated?.roles?.find(role => allowedRoles?.includes(role))
+        authenticated?.role?.find(role => allowedRoles?.includes(role))
             ? <Outlet /> 
-            : authenticated?.user
+            : authenticated?.email
                 ? <Navigate to="/unauthorized" state={{ from: location }} replace />
-                : <Navigate to="/register" state={{ from: location }} replace />
+                : <Navigate to="/login" state={{ from: location }} replace />
     );
 }
 

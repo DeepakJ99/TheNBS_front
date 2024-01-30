@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom
 import Login from './Components/Login'
 import Register from './Components/Register';
 import ProtectedRoutes from './Components/ProtectedRoutes';
+import ParentScroll from './Components/ParentScroll';
 const Protected = () =>{
   return (<>
   <h2>
@@ -16,15 +17,14 @@ const Protected = () =>{
 function App() {
   console.log(1)
   return (
-    
-    
         <Routes>
           <Route path='/login' element = {<Login/>} />
           <Route path = '/register' element = {<Register/>} />
           <Route path = '/unauthorized' element = {<>
             <h2> unauthorized </h2>
           </> } />
-          <Route element = { <ProtectedRoutes allowedRoles={[1984]} /> }>
+          <Route path = "/feed" element = {<ParentScroll />} />
+          <Route element = { <ProtectedRoutes allowedRoles={["ADMIN"]} /> }>
               <Route path = "protected" element = {<Protected />} />
           </Route>
         </Routes>
